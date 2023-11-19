@@ -6,12 +6,14 @@ import Navbar from './components/Navbar'
 
 function App() {
   return (
-    <>
-      <Navbar/>
-      <Routes>
-        <Route path='/' element={<Dashboard/>}/>
-      </Routes>
-    </>
+    <div className=' w-screen max-w-[100%] h-screen flex justify-center'>
+      <div className='w-full z-0'>
+        <Navbar/>
+        <Routes>
+          <Route path='/' element={<Dashboard/>}/>
+        </Routes>
+      </div>
+    </div>
   )
 }
 
