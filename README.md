@@ -1,2 +1,2 @@
-#dashboard
-simple data dashboard app to help visualize data
+# dashboard
+Simple data dashboard app to help visualize data
