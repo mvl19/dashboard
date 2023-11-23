@@ -2,17 +2,19 @@ import { useState } from 'react'
 import {Routes, Route} from 'react-router-dom'
 import './App.css'
 import Dashboard from './pages/Dashboard'
-import { Layout, Menu, Button } from 'antd'
+import Navbar from './components/Navbar'
+import { Layout, Menu } from 'antd'
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   DashboardFilled
 } from '@ant-design/icons'
 
-const { Header, Sider, Content } = Layout
+const { Sider, Content } = Layout
 
 function App() {
   const [collapse, setCollapse] = useState(false)
+  const sideBarCollapse = (bool: boolean) => {
+    setCollapse(bool)
+  }
 
   return (
     <div className='w-screen max-w-[100%] h-screen max-h-[100%] flex justify-center'>
@@ -39,19 +41,7 @@ function App() {
           />
         </Sider>
         <Layout>
-          <Header className='px-5 flex justify-start items-center bg-white z-20 shadow-[0_1px_10px_rgba(0,0,0,0.1)]'>
-            <Button
-              type='text'
-              icon={
-                collapse? 
-                <MenuUnfoldOutlined className='fill-white'/> 
-                : 
-                <MenuFoldOutlined className='stroke-white'/>
-              }
-              onClick={() => setCollapse(!collapse)}
-              className='stroke-white'
-            />
-          </Header>
+          <Navbar func={sideBarCollapse}/>
           <Content className='overflow-scroll'>
             <Routes>
               <Route path='/' element={<Dashboard/>}/>
