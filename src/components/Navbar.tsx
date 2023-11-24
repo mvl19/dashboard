@@ -1,12 +1,12 @@
-import { RiseOutlined, MenuFoldOutlined, DownOutlined } from '@ant-design/icons'
+import { RiseOutlined, MenuFoldOutlined, DownOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { Avatar, Dropdown } from 'antd'
-import { useState } from 'react'
-import { MenuProps, Space, message } from 'antd'
+import { useEffect, useState } from 'react'
+import { MenuProps, Space, Button } from 'antd'
 interface Dropdown {
   label: string,
   key: number
 }
-export default function Navbar() {
+export default function Navbar(props: any) {
     const WHITE_COLOR = '#FCFCFC'
     const items: MenuProps['items'] = [
         {
@@ -29,11 +29,25 @@ export default function Navbar() {
       const onClick: MenuProps['onClick'] = ({ key }) => {
         setItem(items[key])
       };
+      const [collapse, setCollapse] = useState(false)
+      useEffect(() => {
+        props.func(collapse)
+      }, [collapse])
+
     return (
         <div className="flex justify-center align-center sticky top-0 z-20 ">
             <div className="w-[100vw] h-auto max-h-[72px] bg-[#0588F0] flex justify-between gap-[16px] items-center p-[24px] sticky top-0 z-20 shadow-[0_1px_10px_rgba(0,0,0,0.5)]">
                 <div className="flex items-center gap-[6px]">
-                    <MenuFoldOutlined style={{color: WHITE_COLOR}} />
+                  <Button
+                    type='text'
+                    icon={
+                      collapse? 
+                      <MenuUnfoldOutlined style={{color: WHITE_COLOR}} /> 
+                      : 
+                      <MenuFoldOutlined style={{color: WHITE_COLOR}} />
+                    }
+                    onClick={() => setCollapse(!collapse)}
+                  />
                     <RiseOutlined style={{color: WHITE_COLOR}} />
                     <span className="text-[#f8fafc]">Dashboard Admin</span>
                 </div>

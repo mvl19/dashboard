@@ -3,16 +3,52 @@ import {Routes, Route} from 'react-router-dom'
 import './App.css'
 import Dashboard from './pages/Dashboard'
 import Navbar from './components/Navbar'
+import { Layout, Menu } from 'antd'
+import {
+  DashboardFilled
+} from '@ant-design/icons'
+
+const { Sider, Content } = Layout
 
 function App() {
+  const [collapse, setCollapse] = useState(false)
+  const sideBarCollapse = (bool: boolean) => {
+    setCollapse(bool)
+  }
+
   return (
-    <div className=' w-screen max-w-[100%] h-screen flex justify-center'>
-      <div className='w-full z-0'>
-        <Navbar/>
-        <Routes>
-          <Route path='/' element={<Dashboard/>}/>
-        </Routes>
-      </div>
+    <div className='w-screen max-w-[100%] h-screen max-h-[100%] flex justify-center'>
+      <Layout>
+        <Sider trigger={null} collapsible collapsed={collapse} className='h-screen'>
+          <Menu
+            theme = 'dark'
+            mode='inline'
+            defaultSelectedKeys={['1']}
+            items={[
+              {
+                key: '1',
+                icon: <DashboardFilled/>,
+                label: 'Dashboard'
+              },
+              {
+                key: '2',
+                icon: <DashboardFilled/>,
+                label: 'E-Commerce'
+              }
+            ]}
+
+            className='pt-[20px] flex flex-col gap-1 text-left h-[100%]'
+          />
+        </Sider>
+        <Layout>
+          <Navbar func={sideBarCollapse}/>
+          <Content className='overflow-scroll'>
+            <Routes>
+              <Route path='/' element={<Dashboard/>}/>
+            </Routes>   
+          </Content>   
+        </Layout>
+      </Layout>
     </div>
   )
 }
