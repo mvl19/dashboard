@@ -1,0 +1,93 @@
+export default [
+    {
+      country: "AD",
+      burger: 108,
+      burgerColor: "hsl(311, 70%, 50%)",
+      sandwich: 28,
+      sandwichColor: "hsl(129, 70%, 50%)",
+      kebab: 101,
+      kebabColor: "hsl(161, 70%, 50%)",
+      fries: 172,
+      friesColor: "hsl(105, 70%, 50%)",
+      donut: 35,
+      donutColor: "hsl(183, 70%, 50%)"
+    },
+    {
+      country: "AE",
+      burger: 118,
+      burgerColor: "hsl(175, 70%, 50%)",
+      sandwich: 153,
+      sandwichColor: "hsl(240, 70%, 50%)",
+      kebab: 146,
+      kebabColor: "hsl(359, 70%, 50%)",
+      fries: 142,
+      friesColor: "hsl(308, 70%, 50%)",
+      donut: 194,
+      donutColor: "hsl(57, 70%, 50%)"
+    },
+    {
+      country: "AF",
+      burger: 101,
+      burgerColor: "hsl(133, 70%, 50%)",
+      sandwich: 84,
+      sandwichColor: "hsl(69, 70%, 50%)",
+      kebab: 155,
+      kebabColor: "hsl(225, 70%, 50%)",
+      fries: 185,
+      friesColor: "hsl(217, 70%, 50%)",
+      donut: 147,
+      donutColor: "hsl(254, 70%, 50%)"
+    },
+    {
+      country: "AG",
+      burger: 171,
+      burgerColor: "hsl(34, 70%, 50%)",
+      sandwich: 6,
+      sandwichColor: "hsl(248, 70%, 50%)",
+      kebab: 92,
+      kebabColor: "hsl(310, 70%, 50%)",
+      fries: 142,
+      friesColor: "hsl(235, 70%, 50%)",
+      donut: 178,
+      donutColor: "hsl(327, 70%, 50%)"
+    },
+    {
+      country: "AI",
+      burger: 53,
+      burgerColor: "hsl(5, 70%, 50%)",
+      sandwich: 1,
+      sandwichColor: "hsl(238, 70%, 50%)",
+      kebab: 58,
+      kebabColor: "hsl(145, 70%, 50%)",
+      fries: 17,
+      friesColor: "hsl(123, 70%, 50%)",
+      donut: 101,
+      donutColor: "hsl(330, 70%, 50%)"
+    },
+    {
+      country: "AL",
+      burger: 187,
+      burgerColor: "hsl(35, 70%, 50%)",
+      sandwich: 159,
+      sandwichColor: "hsl(120, 70%, 50%)",
+      kebab: 96,
+      kebabColor: "hsl(254, 70%, 50%)",
+      fries: 50,
+      friesColor: "hsl(315, 70%, 50%)",
+      donut: 103,
+      donutColor: "hsl(166, 70%, 50%)"
+    },
+    {
+      country: "AM",
+      burger: 44,
+      burgerColor: "hsl(225, 70%, 50%)",
+      sandwich: 39,
+      sandwichColor: "hsl(252, 70%, 50%)",
+      kebab: 66,
+      kebabColor: "hsl(65, 70%, 50%)",
+      fries: 9,
+      friesColor: "hsl(159, 70%, 50%)",
+      donut: 122,
+      donutColor: "hsl(239, 70%, 50%)"
+    }
+  ]
