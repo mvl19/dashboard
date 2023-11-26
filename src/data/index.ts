@@ -1,4 +1,4 @@
 import bar from "./bar"
-import line from "./line"
+import { salaryData, spendingData } from "./line"
 
-export { bar, line }
+export { bar, salaryData, spendingData }
