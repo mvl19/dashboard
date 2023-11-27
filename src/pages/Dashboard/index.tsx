@@ -1,8 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Flex } from 'antd'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, Draggable, DroppableProps } from 'react-beautiful-dnd'
+
+const firstRow = [
+    {
+        id: '1',
+        name: 'Score Card'
+    },
+    {
+        id: '2',
+        name: 'Bar Chart'
+    },
+    {
+        id: '3',
+        name: 'Pie Chart'
+    }
+]
 
 export default function Dashboard() {
+    const [rowOneItems, setRowOneItems] = useState(firstRow)
 
     return (
         <div className="flex justify-center">
@@ -18,17 +34,25 @@ export default function Dashboard() {
                         Card #3
                     </div>
                 </div>
-                <Flex wrap="wrap" gap='small' justify="space-between" className="border border-darkgrey border-1 p-[10px] w-[98%] min-w-[320px]">
-                    <div className="bg-darkitem h-[90px] lg:basis-[32%] md:basis-auto min-w-[300px] flex justify-center items-center">
-                        Card #1
-                    </div>
-                    <div className="bg-darkitem h-[90px] lg:basis-[32%] md:basis-auto min-w-[300px] flex justify-center items-center">
-                        Card #2
-                    </div>
-                    <div className="bg-darkitem h-[90px] lg:basis-[32%] md:basis-auto min-w-[300px] flex justify-center items-center">
-                        Card #3
-                    </div>
-                </Flex>
+                <DragDropContext onDragEnd={() => console.log('drag event')}>
+                    <Droppable droppableId='rowOne' type='group'>
+                        {(provided: any) => (
+                            <Flex wrap="wrap" gap='small' justify="space-between" className="border border-darkgrey border-1 p-[10px] w-[98%] min-w-[320px]" {...provided.droppableProps} ref={provided.innerRef}>
+                                {
+                                    rowOneItems.map((item, idx) => (
+                                        <Draggable draggableId={item.id} key={item.id} index={idx}>
+                                            {(provided: any) => (
+                                                <div className="bg-darkitem h-[90px] lg:basis-[32%] md:basis-auto min-w-[300px] flex justify-center items-center" {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef}>
+                                                    Card #{item.id} - {item.name}
+                                                </div>
+                                            )}
+                                        </Draggable>
+                                    ))
+                                }
+                            </Flex>
+                        )}
+                    </Droppable>
+                </DragDropContext>
             </div>
         </div>
     )
