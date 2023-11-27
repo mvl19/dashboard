@@ -39,7 +39,6 @@ export default function Navbar(props: Collapsible) {
       ];
       const [item, setItem] = useState<Dropdown[]>(items[3])
       const onClick: MenuProps['onClick'] = ({ key }): void => {
-        console.log(Colors)
         setItem(items[key])
       };
       const [collapse, setCollapse] = useState(false)
