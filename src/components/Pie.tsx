@@ -1,9 +1,8 @@
 import { bar } from "../data"
 import { scaleOrdinal } from "@visx/scale"
-import { GradientPinkRed, GradientTealBlue } from "@visx/gradient"
+import { GradientPurpleTeal } from "@visx/gradient"
 import { Group } from "@visx/group"
 import Pie from '@visx/shape/lib/shapes/Pie';
-import { useState } from "react";
 
 interface Browsers {
     date: string;
@@ -42,13 +41,14 @@ interface PieProps {
     height: number,
     margin?: typeof defaultMargin,
     animate?: boolean,
+    fontSize?: number,
 }
 
 export default function PieChart({
     width,
     height,
     margin=defaultMargin,
-    animate=true,
+    fontSize=14,
 }: PieProps) {
     const accessors = {
         usage: (d: BrowserUsage) => d.usage,
@@ -73,8 +73,9 @@ export default function PieChart({
     const centerX = innerWidth / 2
     const donutThickness = 50
     return (
-        <svg width={width} height={height}>
-            <GradientTealBlue id="visx-pie" />
+        <div>
+            <svg width={width} height={height}>
+            <GradientPurpleTeal id="visx-pie" />
             <rect rx={14} width={width} height={height} fill="url('#visx-pie')" />
             <Group top={centerY + margin.top} left={centerX + margin.left}>
             <Pie
@@ -101,7 +102,7 @@ export default function PieChart({
                                     y={centroidY}
                                     dy=".33em"
                                     fill="#ffffff"
-                                    fontSize={22}
+                                    fontSize={fontSize}
                                     textAnchor="middle"
                                     pointerEvents={"none"}>
                                         {arc.data.label}
@@ -114,5 +115,6 @@ export default function PieChart({
             </Pie>
             </Group>
         </svg>
+        </div>
     )
 }
