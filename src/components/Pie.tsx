@@ -2,7 +2,8 @@ import { bar } from "../data"
 import { scaleOrdinal } from "@visx/scale"
 import { GradientPurpleTeal } from "@visx/gradient"
 import { Group } from "@visx/group"
-import Pie from '@visx/shape/lib/shapes/Pie';
+import Pie from '@visx/shape/lib/shapes/Pie'
+import { useTooltip } from "@visx/tooltip"
 
 interface Browsers {
     date: string;
@@ -66,6 +67,7 @@ export default function PieChart({
         ]
     })
     if (width < 10) return null
+    const { tooltipData, tooltipLeft, tooltipTop, tooltipOpen, showTooltip, hideTooltip } = useTooltip()
     const innerWidth = width - margin.left - margin.right
     const innerHeight = height - margin.top - margin.bottom
     const radius = Math.min(innerWidth, innerHeight) / 2
@@ -85,6 +87,7 @@ export default function PieChart({
               innerRadius={radius - donutThickness}
               cornerRadius={3}
               padAngle={0.005}
+              onMouseEnter={data => console.log(data)}
               >
                 {(pie)=>{
                     return pie.arcs.map((arc, index) => {
@@ -95,7 +98,14 @@ export default function PieChart({
                         const arcFill = getColors(label)
                         return (
                             <g key={`arc-${label}-${index}`}>
-                                <path d={arcPath} fill={arcFill}/>
+                                <path d={arcPath} fill={arcFill}
+                                onMouseEnter={()=>showTooltip({
+                                    tooltipData: arc.data,
+                                    tooltipLeft: centroidX,
+                                    tooltipTop: centroidY,
+                                })}
+                                onMouseLeave={hideTooltip}
+                                />
                                 {hasSpaceForLabel && (
                                     <text
                                     x={centroidX}
@@ -115,6 +125,20 @@ export default function PieChart({
             </Pie>
             </Group>
         </svg>
+        {tooltipOpen && (
+            <div
+            className="tooltip"
+            style={{
+              position: "absolute",
+              top: (height) ,
+              left: tooltipLeft + width / 2,
+              pointerEvents: "none",
+              background: "rgba(0,0,0,0.3)"
+            }}
+          >
+            {JSON.stringify(tooltipData, undefined, "\n")}
+          </div>
+        )}
         </div>
     )
 }
