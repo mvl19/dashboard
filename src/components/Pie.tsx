@@ -1,35 +1,9 @@
-import { bar } from "../data"
 import { scaleOrdinal } from "@visx/scale"
-import { GradientPurpleTeal } from "@visx/gradient"
+import { GradientPinkBlue } from "@visx/gradient"
 import { Group } from "@visx/group"
 import Pie from '@visx/shape/lib/shapes/Pie'
 import { Text } from "@visx/text"
 import { useState } from "react"
-
-interface Browsers {
-    date: string;
-    'Google Chrome': string;
-    'Internet Explorer': string;
-    Firefox: string;
-    Safari: string;
-    'Microsoft Edge': string;
-    Opera: string;
-    Mozilla: string;
-    'Other/Unknown': string;
-}
-
-type BrowserNames = keyof Browsers
-
-interface BrowserUsage {
-    label: BrowserNames,
-    usage: number,
-}
-
-const browserNames = Object.keys(bar[0]).filter(b => b!=='date')
-const browsers: BrowserUsage[] = browserNames.map((name) => ({
-    label: name,
-    usage: Number(bar[0][name]),
-  }));
 
 const defaultMargin = {
     top: 20,
@@ -37,6 +11,13 @@ const defaultMargin = {
     left: 20,
     bottom: 20
 }
+
+interface Datum {
+    [i: number]: never,
+    [k: string]: any,
+}
+
+type Data = Datum[]
 
 interface PieProps {
     width: number,
@@ -46,21 +27,26 @@ interface PieProps {
     fontSize?: number,
     fill?:string,
     annotationFontSize:number,
+    labels: string,
+    accessor: string,
+    dataset:Data,
+    middleTextFill: string,
 }
 
 export default function PieChart({
     width,
     height,
     margin=defaultMargin,
-    fontSize=14,
+    fontSize=10,
     fill='#ffffff',
-    annotationFontSize=14
+    annotationFontSize=14,
+    dataset,
+    labels,
+    accessor,
+    middleTextFill='#ffffff',
 }: PieProps) {
-    const accessors = {
-        usage: (d: BrowserUsage) => d.usage,
-    }
+    const accessors = (d: Data) => d[accessor]
     const getColors = scaleOrdinal({
-        domain: browserNames,
         range: [
             'rgba(255,255,255,0.7)',
             'rgba(255,255,255,0.6)',
@@ -82,12 +68,12 @@ export default function PieChart({
     return (
         <div>
             <svg width={width} height={height}>
-            <GradientPurpleTeal id="visx-pie" />
+            <GradientPinkBlue id="visx-pie" />
             <rect rx={14} width={width} height={height} fill="url('#visx-pie')" />
             <Group top={centerY + margin.top} left={centerX + margin.left}>
             <Pie
-              data={browsers}
-              pieValue={accessors.usage}
+              data={dataset}
+              pieValue={accessors}
               outerRadius={radius}
               innerRadius={radius - donutThickness}
               cornerRadius={3}
@@ -115,7 +101,7 @@ export default function PieChart({
                                     fontSize={fontSize}
                                     textAnchor="middle"
                                     pointerEvents={"none"}>
-                                        {arc.data.label}
+                                        {arc.data[labels]}
                                     </text>
                                 )}
                             </g>
@@ -125,8 +111,8 @@ export default function PieChart({
             </Pie>
             {active ? (
                 <>
-                <Text textAnchor="middle" fill="#ffffff" fontSize={annotationFontSize} dy={-10}>
-                    {active.label + " " + active.usage + "%"}
+                <Text textAnchor="middle" fill={middleTextFill} fontSize={annotationFontSize} dy={-10}>
+                    {active[labels] + " " + active[accessor] + "%"}
                 </Text>
                 </>
             ): (
