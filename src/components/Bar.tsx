@@ -6,7 +6,6 @@ import { AxisBottom, AxisLeft } from "@visx/axis"
 import { bar } from "../data"
 import { Tooltip, defaultStyles, useTooltip } from '@visx/tooltip';
 import { WithTooltipProvidedProps } from '@visx/tooltip/lib/enhancers/withTooltip'
-import { LegendOrdinal } from "@visx/legend"
 
 interface ToolTipData {
     data: SeriesPoint<Datum>,
