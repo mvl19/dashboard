@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
+    "@visx/axis": "^3.5.0",
     "@visx/gradient": "^3.3.0",
     "@visx/group": "^3.3.0",
     "@visx/responsive": "^3.3.0",
