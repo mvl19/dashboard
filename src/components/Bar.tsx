@@ -6,6 +6,7 @@ import { AxisBottom, AxisLeft } from "@visx/axis"
 import { bar } from "../data"
 import { Tooltip, defaultStyles, useTooltip } from '@visx/tooltip';
 import { WithTooltipProvidedProps } from '@visx/tooltip/lib/enhancers/withTooltip'
+import { SalmonAqua } from "../themes/colors"
 
 interface ToolTipData {
     data: SeriesPoint<Datum>,
@@ -35,8 +36,8 @@ interface Datum {
 
 type Data = Datum[]
 
-export const purple3 = '#a44afe'
-export const defaultBackground = '#eaedff'
+const defaultColor = '#a44afe'
+const defaultBackground = '#eaedff'
 
 const defaultMargin = { 
     top: 40, 
@@ -70,12 +71,12 @@ export default function HorizontalBar({
     events=false,
     margin=defaultMargin,
     background=defaultBackground,
-    scale=['#003f5c', '#58508d', '#bc5090', '#ff6361', '#ffa600'],
+    scale=SalmonAqua,
     yLabel='date',
     }: HorizontalBarProps & WithTooltipProvidedProps<ToolTipData>) {
-    const { tooltipOpen, tooltipLeft, tooltipTop, tooltipData, hideTooltip, showTooltip } =
+    const { tooltipOpen, tooltipLeft=0, tooltipTop=0, tooltipData, hideTooltip, showTooltip } =
     useTooltip<ToolTipData>();
-    const accessor = (d: Data) => d[yLabel]
+    const accessor = (d: Data) => new Date(d[yLabel]).toLocaleDateString()
     const yScale = scaleBand<string>({
         domain: data.map(accessor),
         padding: 0.2,
@@ -139,10 +140,10 @@ export default function HorizontalBar({
                     hideAxisLine
                     hideTicks
                     scale={yScale}
-                    stroke={purple3}
-                    tickStroke={purple3}
+                    stroke={defaultColor}
+                    tickStroke={defaultColor}
                     tickLabelProps={{
-                        fill: purple3,
+                        fill: defaultColor,
                         fontSize: 7,
                         textAnchor: 'end',
                         dy: '0.33em',
@@ -151,10 +152,10 @@ export default function HorizontalBar({
                     <AxisBottom 
                     top={yMax}
                     scale={xScale}
-                    stroke={purple3}
-                    tickStroke={purple3}
+                    stroke={defaultColor}
+                    tickStroke={defaultColor}
                     tickLabelProps={{
-                        fill: purple3,
+                        fill: defaultColor,
                         fontSize: 11,
                         textAnchor: 'middle',
                       }}
@@ -162,7 +163,7 @@ export default function HorizontalBar({
                 </Group>
             </svg>
             {tooltipOpen && tooltipData && (
-          <Tooltip top={tooltipTop} left={tooltipLeft} style={tooltipStyles}>
+          <Tooltip top={height + tooltipTop} left={tooltipLeft} style={tooltipStyles}>
             <div style={{ color: colorScale(tooltipData.key) }}>
               <strong>{tooltipData.key}</strong>
             </div>
