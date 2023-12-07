@@ -5,7 +5,7 @@ import Dashboard from './pages/Dashboard'
 import Navbar from './components/Navbar'
 import { Layout, Menu, ConfigProvider } from 'antd'
 import {
-  DashboardFilled
+  DashboardFilled, CalendarOutlined, FundOutlined
 } from '@ant-design/icons'
 
 const { Sider, Content } = Layout
@@ -43,6 +43,16 @@ function App() {
                   key: '2',
                   icon: <DashboardFilled/>,
                   label: 'E-Commerce'
+                },
+                {
+                  key: '3',
+                  icon: <CalendarOutlined />,
+                  label: 'Calendar'
+                },
+                {
+                  key: '4',
+                  icon: <FundOutlined />,
+                  label: 'Charts'
                 }
               ]}
 

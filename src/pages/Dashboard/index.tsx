@@ -2,6 +2,12 @@ import { useState, useEffect } from "react";
 import { Flex } from 'antd'
 import { DragDropContext, Draggable } from 'react-beautiful-dnd'
 import { StrictModeDroppable as Droppable } from "./helper/StrictModeDnd";
+import LineChart from "../../components/Line"
+import PieChart from "../../components/Pie"
+import HorizontalBar from "../../components/Bar"
+import { bar, salaryData, spendingData } from "../../data"
+import { ParentSize } from "@visx/responsive"
+import { letterFrequency } from "../../data"
 
 const firstRow = [
     {
@@ -64,6 +70,12 @@ export default function Dashboard() {
                         )}
                     </Droppable>
                 </DragDropContext>
+                <ParentSize>
+                    {({ width, height }) =><HorizontalBar width={width} height={height} />}
+                </ParentSize>
+                <ParentSize>
+                    {({ width, height }) =><PieChart width={width} height={height} dataset={letterFrequency} accessor="frequency" labels="letter" />}
+                </ParentSize>
             </div>
         </div>
     )
