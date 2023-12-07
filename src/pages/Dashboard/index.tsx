@@ -74,7 +74,7 @@ export default function Dashboard() {
                     {({ width, height }) =><AreaChart width={width} height={height} />}
                 </ParentSize>
                 <ParentSize>
-                    {({ width, height }) =><HorizontalBar width={width} height={height} />}
+                    {({ width, height }) =><HorizontalBar width={width} height={height} data={bar.slice(0,8)}/>}
                 </ParentSize>
                 <ParentSize>
                     {({ width, height }) =><PieChart width={width} height={height} dataset={letterFrequency} accessor="frequency" labels="letter" />}

@@ -27,6 +27,7 @@ interface HorizontalBarProps {
     scale?: string [],
     yLabel?: string,
     keys?: string [],
+    data: Datum
 }
 
 interface Datum {
@@ -73,6 +74,7 @@ export default function HorizontalBar({
     background=defaultBackground,
     scale=SalmonAqua,
     yLabel='date',
+    data
     }: HorizontalBarProps & WithTooltipProvidedProps<ToolTipData>) {
     const { tooltipOpen, tooltipLeft=0, tooltipTop=0, tooltipData, hideTooltip, showTooltip } =
     useTooltip<ToolTipData>();

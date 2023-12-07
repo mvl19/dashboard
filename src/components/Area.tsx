@@ -212,7 +212,7 @@ export default function AreaChart({
                   {`$${yAccessor(tooltipData)}`}
                 </TooltipWithBounds>
                 <Tooltip
-                  top={innerHeight + margin.top - 14}
+                  top={innerHeight}
                   left={tooltipLeft}
                   style={{
                     ...defaultStyles,

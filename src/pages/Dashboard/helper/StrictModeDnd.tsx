@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Droppable, DroppableProps } from "react-beautiful-dnd";
 
 export const StrictModeDroppable = ({ children, ...props }: DroppableProps) => {
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = useState<boolean>(false);
 
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true));
