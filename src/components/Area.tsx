@@ -1,6 +1,6 @@
 import { AreaClosed, Line, Bar } from "@visx/shape"
 import { scaleTime, scaleLinear, scaleBand } from "@visx/scale"
-import { AxisBottom, AxisRight } from "@visx/axis"
+import { AxisBottom } from "@visx/axis"
 import { curveMonotoneX } from '@visx/curve'
 import { Tooltip, TooltipWithBounds, useTooltip, defaultStyles } from '@visx/tooltip'
 import { LinearGradient } from "@visx/gradient"

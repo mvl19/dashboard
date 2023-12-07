@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 import { Flex } from 'antd'
-import { DragDropContext, Draggable } from 'react-beautiful-dnd'
-import { StrictModeDroppable as Droppable } from "./helper/StrictModeDnd";
-import AreaChart from "../../components/Area";
+import { DragDropContext, Draggable, DropResult } from 'react-beautiful-dnd'
+import { StrictModeDroppable as Droppable } from "./helper/StrictModeDnd"
+import AreaChart from "../../components/Area"
 import PieChart from "../../components/Pie"
 import HorizontalBar from "../../components/Bar"
 import { bar, salaryData, spendingData } from "../../data"
 import { ParentSize } from "@visx/responsive"
 import { letterFrequency } from "../../data"
+
+interface RowComponent {
+    id: string, 
+    name: string,
+}
 
 const firstRow = [
     {
@@ -25,9 +30,9 @@ const firstRow = [
 ]
 
 export default function Dashboard() {
-    const [rowOneItems, setRowOneItems] = useState(firstRow)
+    const [rowOneItems, setRowOneItems] = useState<RowComponent[]>(firstRow)
 
-    const handleDragDrop = (res: any) => {
+    const handleDragDrop = (res: DropDrag) => {
         const {source, destination, type} = res
         
         if(!destination) return;
@@ -52,12 +57,12 @@ export default function Dashboard() {
             <div className="w-[100%] h-screen max-h-[100%] flex flex-col items-center bg-darkbg p-[24px]">
                 <DragDropContext onDragEnd={handleDragDrop}>
                     <Droppable droppableId='rowOne' type='group' direction="horizontal">
-                        {(provided: any) => (
+                        {(provided: DropResult) => (
                             <Flex wrap="wrap" gap='small' justify="space-between" className="p-[10px] w-[98%] min-w-[320px]" {...provided.droppableProps} ref={provided.innerRef}>            
                                 {
                                     rowOneItems.map((item, idx) => (
                                         <Draggable draggableId={item.id} key={item.id} index={idx}>
-                                            {(provided: any) => (
+                                            {(provided: DropResult) => (
                                                 <div className="bg-darkitem h-[90px] lg:basis-[32%] md:basis-auto min-w-[300px] flex justify-center items-center" {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef}>
                                                     Card #{item.id} - {item.name}
                                                 </div>
@@ -69,7 +74,7 @@ export default function Dashboard() {
                             </Flex>
                         )}
                     </Droppable>
-                </DragDropContext>
+                </DragDropContext>``
                 <ParentSize>
                     {({ width, height }) =><AreaChart width={width} height={height} />}
                 </ParentSize>
