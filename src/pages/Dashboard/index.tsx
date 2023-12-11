@@ -8,6 +8,7 @@ import HorizontalBar from "../../components/Bar"
 import { bar, salaryData, spendingData } from "../../data"
 import { ParentSize } from "@visx/responsive"
 import { letterFrequency } from "../../data"
+import DisplayTable from "../../components/Table"
 
 interface RowComponent {
     id: string, 
@@ -74,7 +75,8 @@ export default function Dashboard() {
                             </Flex>
                         )}
                     </Droppable>
-                </DragDropContext>``
+                </DragDropContext>
+                <DisplayTable />
                 <ParentSize>
                     {({ width, height }) =><AreaChart width={width} height={height} />}
                 </ParentSize>

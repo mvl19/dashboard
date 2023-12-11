@@ -55,16 +55,6 @@ const tooltipStyles = {
 }
 
 let tooltipTimeout: number
-const data = bar.slice(0,15)
-const keys = Object.keys(data[0]).filter(d=> d!== 'date')
-const dataTotal = data.reduce((allTotal, date) => {
-    const totalUsage = keys.reduce((daily, k) => {
-        daily += Number(date[k])
-        return daily
-    }, 0)
-    allTotal.push(totalUsage)
-    return allTotal
-}, [] as number[])
 
 export default function HorizontalBar({
     width,
@@ -76,8 +66,18 @@ export default function HorizontalBar({
     yLabel='date',
     data
     }: HorizontalBarProps & WithTooltipProvidedProps<ToolTipData>) {
-    const { tooltipOpen, tooltipLeft=0, tooltipTop=0, tooltipData, hideTooltip, showTooltip } =
-    useTooltip<ToolTipData>();
+    const { tooltipOpen, tooltipLeft=0, tooltipTop=0, tooltipData, hideTooltip, showTooltip } = useTooltip<ToolTipData>();
+    const keys = Object.keys(data[0]).filter(d=> d!== yLabel)
+
+    const dataTotal = data.reduce((allTotal, date) => {
+        const totalUsage = keys.reduce((daily, k) => {
+            daily += Number(date[k])
+            return daily
+        }, 0)
+        allTotal.push(totalUsage)
+        return allTotal
+    }, [] as number[])
+    
     const accessor = (d: Data) => d[yLabel]
     const yScale = scaleBand<string>({
         domain: data.map(accessor),
