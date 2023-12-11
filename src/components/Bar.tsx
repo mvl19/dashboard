@@ -78,7 +78,7 @@ export default function HorizontalBar({
     }: HorizontalBarProps & WithTooltipProvidedProps<ToolTipData>) {
     const { tooltipOpen, tooltipLeft=0, tooltipTop=0, tooltipData, hideTooltip, showTooltip } =
     useTooltip<ToolTipData>();
-    const accessor = (d: Data) => new Date(d[yLabel]).toLocaleDateString()
+    const accessor = (d: Data) => d[yLabel]
     const yScale = scaleBand<string>({
         domain: data.map(accessor),
         padding: 0.2,
