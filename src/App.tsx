@@ -7,6 +7,8 @@ import { Layout, Menu, ConfigProvider } from 'antd'
 import {
   DashboardFilled, CalendarOutlined, FundOutlined
 } from '@ant-design/icons'
+import DisplayTable from './components/Table'
+import { bar } from './data'
 
 const { Sider, Content } = Layout
 
@@ -65,6 +67,7 @@ function App() {
           <Content className='overflow-scroll'>
             <Routes>
               <Route path='/' element={<Dashboard/>}/>
+              <Route path='table' element={<DisplayTable />} />
             </Routes>   
           </Content>   
         </Layout>
