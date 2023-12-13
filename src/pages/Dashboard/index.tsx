@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Flex } from 'antd'
 import { DragDropContext, Draggable, DropResult } from 'react-beautiful-dnd'
 import { StrictModeDroppable as Droppable } from "./helper/StrictModeDnd"
 import AreaChart from "../../components/Area"
 import PieChart from "../../components/Pie"
 import HorizontalBar from "../../components/Bar"
-import { bar, salaryData, spendingData } from "../../data"
+import { bar } from "../../data"
 import { ParentSize } from "@visx/responsive"
 import { letterFrequency } from "../../data"
 
@@ -32,7 +32,19 @@ const firstRow = [
 export default function Dashboard() {
     const [rowOneItems, setRowOneItems] = useState<RowComponent[]>(firstRow)
 
-    const handleDragDrop = (res: DropDrag) => {
+    interface DraggerDropper {
+        source: {
+            index: number,
+            droppableId: number
+        },
+        destination: {
+            index: number,
+            droppableId: number
+        },
+        type: string
+    }
+    
+    const handleDragDrop = (res: DraggerDropper) => {
         const {source, destination, type} = res
         
         if(!destination) return;
