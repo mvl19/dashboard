@@ -69,7 +69,7 @@ export default function Navbar(props: Collapsible) {
                 <div className={`h-auto max-h-[72px] flex justify-end gap-10px items-center gap-[16px] text-[${Colors.TEXT_COLOR}]`}>
                     <Dropdown menu={{items, onClick}}>
                         <a className={'hover:text-[#f8fafc]'} onClick={(e)=>e.preventDefault()}>
-                          <Space>
+                          <Space data-testid="dropdown-menu">
                             {item.label}
                             <DownOutlined />
                           </Space>

@@ -1,10 +1,18 @@
-import { describe, it } from 'vitest'
+import { describe, it, vi, expect } from 'vitest'
 import Navbar from '../components/Navbar'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { userEvent } from '@testing-library/user-event'
 
-describe('Dashboard', ()=>{
+describe('Navbar rendering tests', ()=>{
     it('minimize container', ()=> {
-        render(<Navbar func={()=>{return }} />)
+        render(<Navbar func={()=>{vi.fn() }} />)
         screen.debug()
+    })
+
+    it('menu dropdown click', async ()=>{
+        const user = userEvent.setup()
+        render(<Navbar func={()=>{vi.fn()}} />)
+        const button = screen.getByTestId('dropdown-menu')
+        await user.click(button)
     })
 })

@@ -74,7 +74,7 @@ export default function Dashboard() {
                             </Flex>
                         )}
                     </Droppable>
-                </DragDropContext>``
+                </DragDropContext>
                 <ParentSize>
                     {({ width, height }) =><AreaChart width={width} height={height} />}
                 </ParentSize>
@@ -84,7 +84,7 @@ export default function Dashboard() {
                 <ParentSize>
                     {({ width, height }) =><PieChart width={width} height={height} dataset={letterFrequency} accessor="frequency" labels="letter" />}
                 </ParentSize>
-                
+
             </div>
         </div>
     )
