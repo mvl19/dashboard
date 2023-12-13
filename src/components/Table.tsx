@@ -51,7 +51,7 @@ const data: DataType[] = [
 
 export default function DisplayTable({
     dataset=data,
-    darkMode=false,
+    darkMode=true,
     }: TableProps) {
     const [searchText, setSearchText] = useState<string>('')
     const [searchedColumn, setSearchedColumn] = useState<string>('')
@@ -168,13 +168,13 @@ export default function DisplayTable({
             })
         }
     })
-
-    if(!darkMode)
     return (
+    darkMode ? (
         <ConfigProvider theme={{
             algorithm: theme.darkAlgorithm,
           }}>
             <Table columns={columns} dataSource={data}  />
         </ConfigProvider>
+    ) : <Table columns={columns} dataSource={data} />
     )
 }
