@@ -9,6 +9,8 @@ import {
 } from '@ant-design/icons'
 import DisplayTable from './components/Table'
 import { bar } from './data'
+import { Error404, Error500 } from './pages/Routes/ErrorPage'
+import CalendarChart from './components/Calendar'
 
 const { Sider, Content } = Layout
 
@@ -66,8 +68,10 @@ function App() {
           <Navbar func={sideBarCollapse}/>
           <Content className='overflow-scroll'>
             <Routes>
-              <Route path='/' element={<Dashboard/>}/>
-              <Route path='table' element={<DisplayTable />} />
+              <Route path='/' element={<Dashboard/>} />
+              <Route path='table' element={<DisplayTable darkMode={false} dataset={bar}/>} />
+              <Route path='calendar' element={<CalendarChart />} />
+              <Route path='*' element={<Error500 />} />
             </Routes>   
           </Content>   
         </Layout>

@@ -173,8 +173,8 @@ export default function DisplayTable({
         <ConfigProvider theme={{
             algorithm: theme.darkAlgorithm,
           }}>
-            <Table columns={columns} dataSource={data}  />
+            <Table columns={columns} dataSource={dataset}  />
         </ConfigProvider>
-    ) : <Table columns={columns} dataSource={data} />
+    ) : <Table columns={columns} dataSource={dataset} />
     )
 }
