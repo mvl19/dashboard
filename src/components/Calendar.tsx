@@ -1,5 +1,4 @@
 import { Badge, Calendar } from "antd"
-import './calendar.css'
 import type { Dayjs } from "dayjs"
 
 interface Data {

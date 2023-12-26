@@ -11,6 +11,8 @@ import DisplayTable from './components/Table'
 import { bar } from './data'
 import { Error404, Error500 } from './pages/Routes/ErrorPage'
 import CalendarChart from './components/Calendar'
+import StatCard from './components/StatCard'
+import { Link } from 'react-router-dom'
 
 const { Sider, Content } = Layout
 
@@ -41,7 +43,7 @@ function App() {
                 {
                   key: '1',
                   icon: <DashboardFilled/>,
-                  label: 'Dashboard'
+                  label: <Link to="/">{'Dashboard'}</Link>
                 },
                 {
                   key: '2',
@@ -51,7 +53,7 @@ function App() {
                 {
                   key: '3',
                   icon: <CalendarOutlined />,
-                  label: 'Calendar'
+                  label: <Link to="calendar">{'Calendar'}</Link>
                 },
                 {
                   key: '4',
@@ -71,6 +73,7 @@ function App() {
               <Route path='/' element={<Dashboard/>} />
               <Route path='table' element={<DisplayTable darkMode={false} dataset={bar}/>} />
               <Route path='calendar' element={<CalendarChart />} />
+              <Route path='card' element={<StatCard />} />
               <Route path='*' element={<Error500 />} />
             </Routes>   
           </Content>   
